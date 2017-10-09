@@ -40,17 +40,54 @@ angular.module('starter.controllers', [])
     }, 1000);
   };
 })
-
-.controller('PlaylistsCtrl', function($scope) {
-  $scope.playlists = [
-    { title: 'Reggae', id: 1 },
-    { title: 'Chill', id: 2 },
-    { title: 'Dubstep', id: 3 },
-    { title: 'Indie', id: 4 },
-    { title: 'Rap', id: 5 },
-    { title: 'Cowbell', id: 6 }
-  ];
+.controller('CachorroCtrl', function($scope) {
+  $scope.titulo="Aqui teremos detalhes dos cachorros, aguardem";
+  $scope.animal={
+    "id":"1",
+    "nome":"Thor",
+    "descricao":" Pensando mais a longo prazo, o início da atividade geral de formação de atitudes ainda não demonstrou convincentemente que vai participar na mudança das formas de ação. Podemos já vislumbrar o modo pelo qual a complexidade dos estudos efetuados cumpre um papel essencial na formulação dos paradigmas corporativos.",
+    "contato":"2345678",
+    "imagem":"http://via.placeholder.com/350x150"
+  };
 })
+.controller('CachorrosCtrl', function($scope) {
+  $scope.titulo="Busca por cachorros";
+  $scope.animais = [{
+    "id":"1",
+    "nome":"Thor",
+    "descricao":" Pensando mais a longo prazo, o início da atividade geral de formação de atitudes ainda não demonstrou convincentemente que vai participar na mudança das formas de ação. Podemos já vislumbrar o modo pelo qual a complexidade dos estudos efetuados cumpre um papel essencial na formulação dos paradigmas corporativos.",
+    "contato":"2345678",
+    "imagem":"http://via.placeholder.com/350x150"
+  },
+  {
+    "id":"2",
+    "nome":"Eike",
+    "descricao":"  o início da atividade geral de formação de atitudes ainda não demonstrou convincentemente que vai participar na mudança das formas de ação. Podemos já vislumbrar o modo pelo qual a complexidade dos estudos efetuados cumpre um papel essencial na formulação dos paradigmas corporativos.",
+    "contato":"321321321",
+    "imagem":"http://via.placeholder.com/350x150"
+  },
+  {
+    "id":"3",
+    "nome":"Cunha",
+    "descricao":" Pensando mais a longo prazo, o início da atividade geral de formação de atitudes ainda não demonstrou convincentemente que vai participar na mudança das formas de ação. Podemos já vislumbrar o modo pelo qual a complexidade dos estudos efetuados cumpre um papel essencial na formulação dos paradigmas corporativos.",
+    "contato":"765765765",
+    "imagem":"http://via.placeholder.com/350x150"
+  },
+  {
+    "id":"4",
+    "nome":"Aecio",
+    "descricao":" Pensando mais a longo prazo, o início da atividade geral de formação de atitudes ainda não demonstrou convincentemente que vai participar na mudança das formas de ação. Podemos já vislumbrar o modo pelo qual a complexidade dos estudos efetuados cumpre um papel essencial na formulação dos paradigmas corporativos.",
+    "contato":"2345678",
+    "imagem":"http://via.placeholder.com/350x150"
+  }];
+})
+.controller('GatosCtrl', function($scope) {
+  $scope.animais = [];
+})
+.controller('PerfilCtrl', function($scope) {
+  
+})
+;
 
-.controller('PlaylistCtrl', function($scope, $stateParams) {
-});
+
+
