@@ -1,8 +1,11 @@
 angular.module('starter.controllers', [])
 
-.controller('AppCtrl', function($scope, $ionicModal, $timeout, Auth) {
+.controller('AppCtrl', function($scope, $ionicModal, $timeout, Auth, $rootScope) {
 
-
+  var usertemp = localStorage.getItem("user");
+  if(usertemp.length >0){
+    $rootScope.estaLogado = true;
+  }
 
   // Form data for the login modal
   $scope.loginData = {};
@@ -23,6 +26,11 @@ angular.module('starter.controllers', [])
   $scope.login = function() {
     $scope.modal.show();
   };
+  $scope.logout = function(){
+    localStorage.removeItem("user");
+    localStorage.removeItem("token");
+    $rootScope.estaLogado = false;
+  }
 
   // Perform the login action when the user submits the login form
   $scope.doLogin = function() {
@@ -33,8 +41,9 @@ angular.module('starter.controllers', [])
       Auth.salvaLocalStorage("token",ret.data.token);
       $rootScope.estaLogado = true;
       $rootScope.token = ret.data.token;
+      $rootScope.$broadcast('autenticado');
     });
-    
+
     $timeout(function() {
       $scope.closeLogin();
     }, 1000);
@@ -69,7 +78,7 @@ angular.module('starter.controllers', [])
     })
 
   })
-.controller('GatosCtrl', function($scope) {
+.controller('GatosCtrl', function($scope, AnimAPI) {
   $scope.titulo="Busca por gatos";
 
   AnimAPI.query(function(anim){
@@ -78,7 +87,9 @@ angular.module('starter.controllers', [])
   });
 })
 .controller('PerfilCtrl', function($scope) {
-
+  var usertemp = localStorage.getItem("user");
+  console.log(usertemp);
+  $scope.user = JSON.parse(usertemp).user;
 })
 ;
 
