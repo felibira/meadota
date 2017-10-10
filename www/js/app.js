@@ -68,6 +68,15 @@ angular.module('starter', ['ionic', 'starter.controllers','starter.services','ng
         }
       }
     })
+    .state('app.cadastroanimal', {
+      url          : '/cadanim',
+      views        : {
+        'menuContent': {
+          templateUrl  : 'templates/cadastroanimal.html',
+          controller   : 'CadastroAnimalCtrl'
+        }
+      }
+    })
     .state('app.perfil', {
       url: '/perfil',
       views: {

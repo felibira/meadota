@@ -91,6 +91,14 @@ angular.module('starter.controllers', [])
   console.log(usertemp);
   $scope.user = JSON.parse(usertemp).user;
 })
+  .controller('CadastroAnimalCtrl',function($scope, AnimAPI){
+    $scope.animal = new AnimAPI();
+    $scope.cadastra = function(){
+      AnimAPI.save($scope.animal, function (x) {
+        console.log(x);
+      })
+    }
+  })
 ;
 
 

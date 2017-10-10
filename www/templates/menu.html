@@ -30,6 +30,9 @@
         <ion-item menu-close href="#/app/gatos">
           Gatos
         </ion-item>
+        <ion-item menu-close href="#/app/cadanim" ng-if="estaLogado">
+          Cadastra Animal
+        </ion-item>
         <ion-item menu-close ng-click="logout()" ng-if="estaLogado">
           Logout
         </ion-item>

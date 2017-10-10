@@ -28,13 +28,19 @@ angular.module('starter.services', ['ngResource'])
         },
         salvaLocalStorage: function(nome, valor){
             localStorage.setItem(nome, valor);
+        },
+        pegaToken: function(){
+          var temp = localStorage.getItem("user");
+          console.log(temp);
+          var token = JSON.parse(temp).token;
+          return token;
         }
     }
 })
-  .factory('AnimAPI', function($resource, configs) {
+  .factory('AnimAPI', function($resource, configs, Auth) {
     var token="eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJpZCI6MTksImlhdCI6MTUwNzY2MjIzOCwiZXhwIjoxNTA3NzQ4NjM4fQ.7g19hUlitsersIySdOBPsIZ5XY2RsWH2nFDrUftVeLgMli8VHEYCQvF9C_URwQlocMMz1x9Jld08qQXk5vulgw";
     var campoToken = {
-      'Authorization': 'Bearer '+ token
+      'Authorization': 'Bearer '+ Auth.pegaToken()
     };
   return $resource(configs.enderecoapi + 'animals/:id', { id: '@_id' },
     {
@@ -46,6 +52,7 @@ angular.module('starter.services', ['ngResource'])
         headers: campoToken
       },
       save: {
+        method: 'POST',
         headers: campoToken
       },
       remove: {
