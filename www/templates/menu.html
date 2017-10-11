@@ -18,7 +18,10 @@
     </ion-header-bar>
     <ion-content>
       <ion-list>
-        <ion-item menu-close ng-click="login()">
+        <ion-item menu-close ng-click="login()" ng-if="!estaLogado">
+          Login
+        </ion-item>
+        <ion-item menu-close href="#/app/perfil" ng-if="estaLogado">
           Perfil
         </ion-item>
         <ion-item menu-close href="#/app/cachorros">
@@ -26,6 +29,12 @@
         </ion-item>
         <ion-item menu-close href="#/app/gatos">
           Gatos
+        </ion-item>
+        <ion-item menu-close href="#/app/cadastroanimal" ng-if="estaLogado">
+          Cadastro
+        </ion-item>
+        <ion-item menu-close ng-click="logout()" ng-if="estaLogado">
+          logout
         </ion-item>
       </ion-list>
     </ion-content>
