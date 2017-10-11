@@ -62,23 +62,8 @@ $scope.logout = function(){
   });
 
 })
-  .controller('GatoCtrl', function($scope, AnimAPI, $state, $stateParams) {
-    var idAnimal = $stateParams.id;
-    AnimAPI.query({id: idAnimal}, function(anim){
-      console.log(anim.data);
-      $scope.animal = anim.data;
-      $scope.titulo = anim.data.nome;
-    })
+  
 
-  })
-.controller('GatosCtrl', function($scope, AnimAPI) {
-  $scope.titulo="Busca por gatos";
-
-  AnimAPI.query(function(anim){
-    console.log(anim.data);
-    $scope.animais = anim.data;
-  });
-})
 .controller('PerfilCtrl', function($scope) {
   var usertemp = localStorage.getItem("user");
   console.log(usertemp);
@@ -94,6 +79,53 @@ $scope.logout = function(){
         console.log(x);
       })
     }
+  })
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+.controller('GatosCtrl', function($scope, AnimAPI) {
+  $scope.titulo="Busca por gatos";
+  AnimAPI.query(function(anim){
+    $scope.animais = anim.data;
+  });
+})
+.controller('GatoCtrl', function($scope, AnimAPI, $state, $stateParams) {
+    var idAnimal = $stateParams.id;
+    AnimAPI.query({id: idAnimal}, function(anim){
+      $scope.animal = anim.data;
+      $scope.titulo = anim.data.nome;
+    })
+
   })
 ;
 

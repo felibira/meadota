@@ -51,23 +51,13 @@ angular.module('starter.services', ['ngResource'])
         method: 'PUT',
         headers: campoToken
       },
-      query: {
-        headers: campoToken
-      },
       save: {
         method: 'POST',
         headers: campoToken
       },
-      remove: {
-        headers: campoToken
-      },
-      delete: {
-        headers: campoToken
-      },
-      get: {
-        headers: campoToken
-      }
-      
-
+      query:  {        headers: campoToken      },
+      remove: {        headers: campoToken      },
+      delete: {        headers: campoToken      },
+      get:    {        headers: campoToken      }
     });
   })
