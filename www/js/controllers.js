@@ -23,6 +23,11 @@ $scope.logout = function(){
   $scope.login = function() {
     $scope.modal.show();
   };
+  $scope.logout = function(){
+    localStorage.removeItem("user");
+    localStorage.removeItem("token");
+    $rootScope.estaLogado = false;
+  }
 
   $scope.doLogin = function() {
     Auth.verificaLogin($scope.loginData).then(ret => {
@@ -37,53 +42,56 @@ $scope.logout = function(){
     }, 1000);
   };
 })
-.controller('CachorroCtrl', function($scope) {
-  $scope.titulo="Aqui teremos detalhes dos cachorros, aguardem";
-  $scope.animal={
-    "id":"1",
-    "nome":"Thor",
-    "descricao":" Pensando mais a longo prazo, o início da atividade geral de formação de atitudes ainda não demonstrou convincentemente que vai participar na mudança das formas de ação. Podemos já vislumbrar o modo pelo qual a complexidade dos estudos efetuados cumpre um papel essencial na formulação dos paradigmas corporativos.",
-    "contato":"2345678",
-    "imagem":"http://via.placeholder.com/350x150"
-  };
+.controller('CachorroCtrl', function($scope, AnimAPI, $state, $stateParams) {
+
+  console.log($stateParams);
+  var idAnimal = $stateParams.id;
+  AnimAPI.query({id: idAnimal}, function(anim){
+    console.log(anim.data);
+    $scope.animal = anim.data;
+    $scope.titulo = anim.data.nome;
+  })
+
 })
-.controller('CachorrosCtrl', function($scope) {
+.controller('CachorrosCtrl', function($scope, AnimAPI) {
   $scope.titulo="Busca por cachorros";
-  $scope.animais = [{
-    "id":"1",
-    "nome":"Thor",
-    "descricao":" Pensando mais a longo prazo, o início da atividade geral de formação de atitudes ainda não demonstrou convincentemente que vai participar na mudança das formas de ação. Podemos já vislumbrar o modo pelo qual a complexidade dos estudos efetuados cumpre um papel essencial na formulação dos paradigmas corporativos.",
-    "contato":"2345678",
-    "imagem":"http://via.placeholder.com/350x150"
-  },
-  {
-    "id":"2",
-    "nome":"Eike",
-    "descricao":"  o início da atividade geral de formação de atitudes ainda não demonstrou convincentemente que vai participar na mudança das formas de ação. Podemos já vislumbrar o modo pelo qual a complexidade dos estudos efetuados cumpre um papel essencial na formulação dos paradigmas corporativos.",
-    "contato":"321321321",
-    "imagem":"http://via.placeholder.com/350x150"
-  },
-  {
-    "id":"3",
-    "nome":"Cunha",
-    "descricao":" Pensando mais a longo prazo, o início da atividade geral de formação de atitudes ainda não demonstrou convincentemente que vai participar na mudança das formas de ação. Podemos já vislumbrar o modo pelo qual a complexidade dos estudos efetuados cumpre um papel essencial na formulação dos paradigmas corporativos.",
-    "contato":"765765765",
-    "imagem":"http://via.placeholder.com/350x150"
-  },
-  {
-    "id":"4",
-    "nome":"Aecio",
-    "descricao":" Pensando mais a longo prazo, o início da atividade geral de formação de atitudes ainda não demonstrou convincentemente que vai participar na mudança das formas de ação. Podemos já vislumbrar o modo pelo qual a complexidade dos estudos efetuados cumpre um papel essencial na formulação dos paradigmas corporativos.",
-    "contato":"2345678",
-    "imagem":"http://via.placeholder.com/350x150"
-  }];
+
+  AnimAPI.query(function(anim){
+    console.log(anim.data);
+    $scope.animais = anim.data;
+  });
+
 })
-.controller('GatosCtrl', function($scope) {
-  $scope.animais = [];
+  .controller('GatoCtrl', function($scope, AnimAPI, $state, $stateParams) {
+    var idAnimal = $stateParams.id;
+    AnimAPI.query({id: idAnimal}, function(anim){
+      console.log(anim.data);
+      $scope.animal = anim.data;
+      $scope.titulo = anim.data.nome;
+    })
+
+  })
+.controller('GatosCtrl', function($scope, AnimAPI) {
+  $scope.titulo="Busca por gatos";
+
+  AnimAPI.query(function(anim){
+    console.log(anim.data);
+    $scope.animais = anim.data;
+  });
 })
 .controller('PerfilCtrl', function($scope) {
-  
+  var usertemp = localStorage.getItem("user");
+  console.log(usertemp);
+  $scope.user = JSON.parse(usertemp).user;
 })
+  .controller('CadastroAnimalCtrl',function($scope, AnimAPI){
+    $scope.animal = new AnimAPI();
+    $scope.cadastra = function(){
+      AnimAPI.save($scope.animal, function (x) {
+        console.log(x);
+      })
+    }
+  })
 ;
 
 

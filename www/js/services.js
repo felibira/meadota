@@ -1,4 +1,4 @@
-angular.module('starter.services', [])
+angular.module('starter.services', ['ngResource'])
 .constant("configs", {
      "enderecoapi": "http://138.197.191.31:3000/v1/"
   })
@@ -8,7 +8,7 @@ angular.module('starter.services', [])
            return $http.post(configs.enderecoapi + 'auth/signin', {
               email : email,
               password: password
-            });  
+            });
         },
         cadastro: function(){
             return true;
@@ -28,6 +28,42 @@ angular.module('starter.services', [])
         },
         salvaLocalStorage: function(nome, valor){
             localStorage.setItem(nome, valor);
+        },
+        pegaToken: function(){
+          var temp = localStorage.getItem("user");
+          console.log(temp);
+          var token = JSON.parse(temp).token;
+          return token;
         }
     }
 })
+  .factory('AnimAPI', function($resource, configs, Auth) {
+    var token="eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJpZCI6MTksImlhdCI6MTUwNzY2MjIzOCwiZXhwIjoxNTA3NzQ4NjM4fQ.7g19hUlitsersIySdOBPsIZ5XY2RsWH2nFDrUftVeLgMli8VHEYCQvF9C_URwQlocMMz1x9Jld08qQXk5vulgw";
+    var campoToken = {
+      'Authorization': 'Bearer '+ Auth.pegaToken()
+    };
+  return $resource(configs.enderecoapi + 'animals/:id', { id: '@_id' },
+    {
+      update: {
+        method: 'PUT',
+        headers: campoToken
+      },
+      query: {
+        headers: campoToken
+      },
+      save: {
+        method: 'POST',
+        headers: campoToken
+      },
+      remove: {
+        headers: campoToken
+      },
+      delete: {
+        headers: campoToken
+      },
+      get: {
+        headers: campoToken
+      }
+
+    });
+  })

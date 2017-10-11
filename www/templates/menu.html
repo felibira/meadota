@@ -21,7 +21,8 @@
         <ion-item menu-close ng-click="login()" ng-if="!estaLogado">
           Login
         </ion-item>
-        <ion-item menu-close href="#/app/perfil" ng-if="estaLogado">
+
+        <ion-item menu-close ng-if="estaLogado" href="#/app/perfil">
           Perfil
         </ion-item>
         <ion-item menu-close href="#/app/cachorros">
