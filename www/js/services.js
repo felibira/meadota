@@ -30,15 +30,18 @@ angular.module('starter.services', ['ngResource'])
             localStorage.setItem(nome, valor);
         },
         pegaToken: function(){
+          var token = '';
           var temp = localStorage.getItem("user");
           console.log(temp);
-          var token = JSON.parse(temp).token;
+          if (temp){
+            token = JSON.parse(temp).token;
+          }
           return token;
         }
     }
 })
   .factory('AnimAPI', function($resource, configs, Auth) {
-    var token="eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJpZCI6MTksImlhdCI6MTUwNzY2MjIzOCwiZXhwIjoxNTA3NzQ4NjM4fQ.7g19hUlitsersIySdOBPsIZ5XY2RsWH2nFDrUftVeLgMli8VHEYCQvF9C_URwQlocMMz1x9Jld08qQXk5vulgw";
+   
     var campoToken = {
       'Authorization': 'Bearer '+ Auth.pegaToken()
     };
@@ -64,6 +67,7 @@ angular.module('starter.services', ['ngResource'])
       get: {
         headers: campoToken
       }
+      
 
     });
   })

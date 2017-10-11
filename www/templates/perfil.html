@@ -8,6 +8,9 @@
       <label class="item item-input">
         <input type="text" placeholder="Email" ng-model="user.email">
       </label>
+      <label class="item item-input">
+        criado em {{ user.createdAt | date : 'dd/MM/yyyy'}}
+      </label>
       
     </div>
   </ion-content>

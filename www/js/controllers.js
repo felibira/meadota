@@ -82,8 +82,11 @@ $scope.logout = function(){
 .controller('PerfilCtrl', function($scope) {
   var usertemp = localStorage.getItem("user");
   console.log(usertemp);
-  $scope.user = JSON.parse(usertemp).user;
+  if(usertemp) $scope.user = JSON.parse(usertemp).user;
 })
+
+
+
   .controller('CadastroAnimalCtrl',function($scope, AnimAPI){
     $scope.animal = new AnimAPI();
     $scope.cadastra = function(){
